@@ -34,7 +34,7 @@
 (defn create
   "Inserts a new discussion with the passed parameters, sanitizing blank author and category fields."
   [db params]
-  (def db-user (users-model/get-by-name [(:author params)]))
+  (def db-user (users-model/get-by-name db [(:author params)]))
   (if db-user
     (def verified? (security/encrypt-verify (:password params) (:password db-user)))
     (def verified? false))
@@ -55,7 +55,7 @@
 (defn create-reply
   "Inserts a new reply with the passed parameters, sanitizing blank author fields."
   [db params]
-  (def db-user (users-model/get-by-name [(:author params)]))
+  (def db-user (users-model/get-by-name db [(:author params)]))
   (if db-user
     (def verified? (security/encrypt-verify (:password params) (:password db-user)))
     (def verified? false))
