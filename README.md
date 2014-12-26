@@ -9,6 +9,15 @@ If using Leiningen, add the following to your `project.clj` file under `:depende
 
     [clorum-core "0.1.0-SNAPSHOT"]
 
+## Documentation
+
+Project documentation is generated with [Codox][] and can be found
+[on GitHub Pages](https://ipavl.github.io/clorum-core/doc/), or generated locally by running:
+
+    lein doc
+
+[codox]: https://github.com/weavejester/codox
+
 ## License
 
 Copyright © 2014 ipavl
