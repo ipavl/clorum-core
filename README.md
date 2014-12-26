@@ -1,5 +1,7 @@
 # clorum-core
 
+[![Dependency Status](https://www.versioneye.com/user/projects/549cec596b1b81202d0005d4/badge.svg?style=flat)](https://www.versioneye.com/user/projects/549cec596b1b81202d0005d4)
+
 A Clojure library to provide functions for message-board style applications.
 Designed to power [Clorum](https://github.com/ipavl/clorum).
 
