@@ -1,4 +1,4 @@
-(ns clorum-core.sanitization
+(ns clorum-core.util.sanitization
   (:require [clojure.string :as string]))
 
 (defn author

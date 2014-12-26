@@ -4,7 +4,7 @@
             [java-jdbc.sql :as sql]
             [clorum-core.util.time :as time]
             [clorum-core.util.security :as security]
-            [clorum-core.sanitization :as sanitize]))
+            [clorum-core.util.sanitization :as sanitize]))
 
 (defn all
   "Returns all rows in the users table."
