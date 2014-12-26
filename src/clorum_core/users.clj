@@ -46,7 +46,7 @@
 (defn save
   "Updates the user with the specified id with the passed parameters if the given password is correct."
   [db id params]
-  (if (security/encrypt-verify (:currentpass params) (:password (get id)))
+  (if (security/encrypt-verify (:currentpass params) (:password (get db id)))
     (jdbc/update! db :users (merge (apply dissoc params [:currentpass
                                                          :permissions
                                                          :registered
