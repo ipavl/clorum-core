@@ -1,5 +1,5 @@
 (defproject clorum-core "0.1.0-SNAPSHOT"
-  :description "Core library for Clorum"
+  :description "Library for message-board style web applications."
   :url "https://github.com/ipavl/clorum-core"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
