@@ -9,7 +9,7 @@ Designed to power [Clorum](https://github.com/ipavl/clorum).
 
 If using Leiningen, add the following to your `project.clj` file under `:dependencies`:
 
-    [clorum-core "0.1.0-SNAPSHOT"]
+[![Clojars Project](http://clojars.org/clorum-core/latest-version.svg)](http://clojars.org/clorum-core)
 
 ## Documentation
 
