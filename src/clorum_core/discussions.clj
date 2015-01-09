@@ -26,10 +26,10 @@
               (sql/select * :replies (sql/where {:parent parent}))))
 
 (defn get-recent
-  "Returns the newest 15 discussions."
-  [db]
+  "Returns the newest n discussions."
+  [db n]
   (jdbc/query db
-              ["SELECT * FROM discussions ORDER BY id DESC LIMIT 15"]))
+              [(clojure.string/join ["SELECT * FROM discussions ORDER BY id DESC LIMIT " n])]))
 
 (defn create
   "Inserts a new discussion with the passed parameters, sanitizing blank author and category fields."
