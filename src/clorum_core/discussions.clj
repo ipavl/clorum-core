@@ -22,7 +22,7 @@
   "Returns all rows in the replies table with the specified parent id."
   [db parent]
   (jdbc/query db
-              (sql/select * :replies (sql/where {:parent parent}))))
+              (sql/select * :replies (sql/where {:parent (sanitize/parse-int parent)}))))
 
 (defn get-recent
   "Returns the newest n discussions."
@@ -58,6 +58,7 @@
 
   (jdbc/insert! db :replies (merge (apply dissoc params [:password])
                                               {:author (sanitize/author (:author params))
+                                               :parent (sanitize/parse-int (:parent params))
                                                :verified verified?})))
 
 (defn save
