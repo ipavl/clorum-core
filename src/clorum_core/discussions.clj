@@ -16,7 +16,7 @@
   "Returns the discussion with the specified id."
   [db id]
   (first (jdbc/query db
-                     (sql/select * :discussions (sql/where {:id id})))))
+                     (sql/select * :discussions (sql/where {:id (sanitize/parse-int id)})))))
 
 (defn get-replies
   "Returns all rows in the replies table with the specified parent id."
@@ -63,10 +63,10 @@
 (defn save
   "Updates the discussion with the specified id with the passed parameters."
   [db id params]
-  (jdbc/update! db :discussions params (sql/where {:id id})))
+  (jdbc/update! db :discussions params (sql/where {:id (sanitize/parse-int id)})))
 
 (defn delete
   "Deletes the discussion with the specified id along with its child replies."
   [db id]
-  (jdbc/delete! db :discussions (sql/where {:id id}))
-  (jdbc/delete! db :replies (sql/where {:parent id})))
+  (jdbc/delete! db :discussions (sql/where {:id (sanitize/parse-int id)}))
+  (jdbc/delete! db :replies (sql/where {:parent (sanitize/parse-int id)})))

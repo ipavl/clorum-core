@@ -15,7 +15,7 @@
   "Returns the user with the specified id."
   [db id]
   (first (jdbc/query db
-                     (sql/select * :users (sql/where {:id id})))))
+                     (sql/select * :users (sql/where {:id (sanitize/parse-int id)})))))
 
 (defn get-by-name
   "Returns the user with the specified name."
@@ -27,13 +27,13 @@
   "Returns all replies made by the user (ignores non-verified entries)."
   [db author]
   (jdbc/query db
-              (sql/select * :replies (sql/where {:author author :verified 1}))))
+              (sql/select * :replies (sql/where {:author author :verified true}))))
 
 (defn get-discussions
   "Returns all discussions started by the user (ignores non-verified entries)."
   [db author]
   (jdbc/query db
-              (sql/select * :discussions (sql/where {:author author :verified 1}))))
+              (sql/select * :discussions (sql/where {:author author :verified true}))))
 
 (defn create
   "Inserts a new user with the passed parameters."
@@ -52,14 +52,14 @@
                                                          :username
                                                          :id])
                                                  {:email (sanitize/blank-string (:email params))
-                                                  :password (security/encrypt (:password params))}) (sql/where {:id id}))))
+                                                  :password (security/encrypt (:password params))}) (sql/where {:id (sanitize/parse-int id)}))))
 
 (defn save-admin
   "Updates the user with the specified id with the passed parameters without verifying the user."
   [db id params]
-  (jdbc/update! db :users params (sql/where {:id id})))
+  (jdbc/update! db :users params (sql/where {:id (sanitize/parse-int id)})))
 
 (defn delete
   "Deletes the user with the specified id."
   [db id]
-  (jdbc/delete! db :users (sql/where {:id id})))
+  (jdbc/delete! db :users (sql/where {:id (sanitize/parse-int id)})))
