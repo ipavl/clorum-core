@@ -7,7 +7,7 @@
                  [org.clojure/java.jdbc "0.3.6"]
                  [org.postgresql/postgresql "9.4-1201-jdbc41"]
                  [java-jdbc/dsl "0.1.2"]
-                 [lib-noir "0.9.5"]]
+                 [lib-noir "0.9.9"]]
   :plugins [[codox "0.8.10"]]
   :codox {:src-dir-uri "https://github.com/ipavl/clorum-core/blob/master/"
           :src-linenum-anchor-prefix "L"})
