@@ -2,7 +2,6 @@
   (:refer-clojure :exclude [get])
   (:require [clojure.java.jdbc :as jdbc]
             [java-jdbc.sql :as sql]
-            [clorum-core.util.time :as time]
             [clorum-core.util.security :as security]
             [clorum-core.util.sanitization :as sanitize]))
 
@@ -40,8 +39,7 @@
   "Inserts a new user with the passed parameters."
   [db params]
   (if (nil? (get-by-name db [(:username params)]))
-    (jdbc/insert! db :users (merge params {:registered (time/current-time-sql)
-                                           :password (security/encrypt (:password params))}))))
+    (jdbc/insert! db :users (merge params {:password (security/encrypt (:password params))}))))
 
 (defn save
   "Updates the user with the specified id with the passed parameters if the given password is correct."

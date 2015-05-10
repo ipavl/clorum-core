@@ -2,7 +2,6 @@
   (:refer-clojure :exclude [get])
   (:require [clojure.java.jdbc :as jdbc]
             [java-jdbc.sql :as sql]
-            [clorum-core.util.time :as time]
             [clorum-core.util.security :as security]
             [clorum-core.util.sanitization :as sanitize]
             [clorum-core.users :as users-model]))
@@ -38,13 +37,10 @@
   (if db-user
     (def verified? (security/encrypt-verify (:password params) (:password db-user)))
     (def verified? false))
-  (def insert-time time/current-time-sql)
 
   (jdbc/insert! db :discussions (merge (apply dissoc params [:password])
                                               {:author (sanitize/author (:author params))
                                                :category (sanitize/category (:category params))
-                                               :created (insert-time)
-                                               :modified (insert-time)
                                                :verified verified?}))
   ;; Rough way of getting the inserted thread's ID. Should probably also check time.
   (last (jdbc/query db
@@ -62,8 +58,6 @@
 
   (jdbc/insert! db :replies (merge (apply dissoc params [:password])
                                               {:author (sanitize/author (:author params))
-                                               :created (time/current-time-sql)
-                                               :modified (time/current-time-sql)
                                                :verified verified?})))
 
 (defn save
